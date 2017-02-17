@@ -136,7 +136,7 @@ var myStyle = function(feature) {
     case "MON": return {color: "#b35806"};
     case "TUE": return {color: "#f1a340"};
     case "WED": return {color: "#fee0b6"};
-    case "THR": return {color: "#d8daeb"};
+    case "THU": return {color: "#d8daeb"};
     case "FRI": return {color: "#998ec3"};
     // case " ": return {color: "#ff0000"}; //uneeded now that we filter these out!
   }
@@ -166,7 +166,7 @@ var returnDOWNameFnx = function(dayOfWeek) {
     case "MON": return "Monday";
     case "TUE": return "Tuesday";
     case "WED": return "Wednesday";
-    case "THR": return "Thursday";
+    case "THU": return "Thursday";
     case "FRI": return "Friday";
   }
   return {};
@@ -174,7 +174,7 @@ var returnDOWNameFnx = function(dayOfWeek) {
 
 var eachFeatureFunction = function(layer) {
   layer.on('click', function (event) {
-    var collectionDay = (layer.feature.properties.COLLDAY);
+    var collectionDay = layer.feature.properties.COLLDAY;
     console.log(collectionDay);
     $('.day-of-week').text(returnDOWNameFnx(collectionDay));
 
@@ -187,29 +187,6 @@ var eachFeatureFunction = function(layer) {
     showResults();
   });
 };
-
-
-//
-// Let's make something happen when a user clicks on a feature. Change the "Day of
-// Week" in the sidebar to show the day of the week of garbage removal. Make sure
-// to display the full name (display "Monday" instead of "MON").
-//
-// We will write everything we want to happen to each feature inside of the
-// following (aptly named) function:
-//
-// var eachFeatureFunction = function(feature, layer) {
-//   ...
-// });
-//
-// You'll notice that inside of that block of code we have a second block of code:
-//
-// layer.on('click', function (e) {
-//   ...
-// })
-//
-// That part sets up a click event on each feature. Any code inside that second
-// block of code will happen each time a feature is clicked.
-
 
 
 

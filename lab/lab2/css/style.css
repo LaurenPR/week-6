@@ -29,17 +29,24 @@ p.main {
 
 .legend {
   position: absolute;
-  background-color: #fff;
   z-index: 2000;
+  bottom: 0;
+  right: 0;
+  padding: 0;
+
 }
 
-.boxColor {
-
+.legend li {
+  font-size: 80%;
+  list-style: none;
+  float: left;
+  margin-bottom: 6px;
 }
 
-span {
+.legend span {
   display:block;
   height: 20px;
   float: left;
   width: 20px;
+  margin: 0 7px;
 }
