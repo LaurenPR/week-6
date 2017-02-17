@@ -138,7 +138,7 @@ var myStyle = function(feature) {
     case "WED": return {color: "#fee0b6"};
     case "THR": return {color: "#d8daeb"};
     case "FRI": return {color: "#998ec3"};
-    case " ": return {color: "#ff0000"};
+    // case " ": return {color: "#ff0000"}; //uneeded now that we filter these out!
   }
 
   return {};
@@ -146,24 +146,6 @@ var myStyle = function(feature) {
 
 
 
-//
-// Style each garbage collection area with a different color depending on what day
-// of the week garbage collection occurs. For example, all areas with Monday
-// garbage collection could be red, all areas with Tuesday garbage collection could
-// be blue, etc.
-//
-// The myStyle function should return an object that contains style information.
-// For example, if you add the following line inside of the myStyle function, every
-// feature should be colored red.
-//
-// return {fillColor: 'red'}
-//
-// Other options for styling include opacity and weight. For a full list, see:
-// http://leafletjs.com/reference.html#path
-//
-// For our myStyle function, we want a different fillColor to be returned depending
-// on the day of the week. If you need help, review http://leafletjs.com/examples/geojson.html for
-// working examples of this function.
 
 var showResults = function() {
   /* =====================
@@ -179,8 +161,23 @@ var showResults = function() {
 };
 
 
+var returnDOWNameFnx = function(dayOfWeek) {
+  switch (dayOfWeek) {
+    case "MON": return "Monday";
+    case "TUE": return "Tuesday";
+    case "WED": return "Wednesday";
+    case "THR": return "Thursday";
+    case "FRI": return "Friday";
+  }
+  return {};
+};
+
 var eachFeatureFunction = function(layer) {
   layer.on('click', function (event) {
+    var collectionDay = (layer.feature.properties.COLLDAY);
+    console.log(collectionDay);
+    $('.day-of-week').text(returnDOWNameFnx(collectionDay));
+
     /* =====================
     The following code will run every time a layer on the map is clicked.
     Check out layer.feature to see some useful data about the layer that
@@ -191,8 +188,38 @@ var eachFeatureFunction = function(layer) {
   });
 };
 
+
+//
+// Let's make something happen when a user clicks on a feature. Change the "Day of
+// Week" in the sidebar to show the day of the week of garbage removal. Make sure
+// to display the full name (display "Monday" instead of "MON").
+//
+// We will write everything we want to happen to each feature inside of the
+// following (aptly named) function:
+//
+// var eachFeatureFunction = function(feature, layer) {
+//   ...
+// });
+//
+// You'll notice that inside of that block of code we have a second block of code:
+//
+// layer.on('click', function (e) {
+//   ...
+// })
+//
+// That part sets up a click event on each feature. Any code inside that second
+// block of code will happen each time a feature is clicked.
+
+
+
+
 var myFilter = function(feature) {
-  return true;
+  if (feature.properties.COLLDAY === " "){
+    return false;
+  }
+  else {
+    return true;
+  }
 };
 
 var tempdata;

@@ -32,3 +32,14 @@ p.main {
   background-color: #fff;
   z-index: 2000;
 }
+
+.boxColor {
+
+}
+
+span {
+  display:block;
+  height: 20px;
+  float: left;
+  width: 20px;
+}
