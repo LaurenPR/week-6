@@ -44,6 +44,10 @@ For our myStyle function, we want a different fillColor to be returned depending
 on the day of the week. If you need help, review http://leafletjs.com/examples/geojson.html for
 working examples of this function.
 
+HOW TO FIND UNIQUE VALUE OF A PROPERTY:
+var allDays = _.map(tempdata.features, function(item) {return item.properties.COLLDAY;});
+_.groupBy(allDays)
+
 ## Task 3
 
 You might have noticed that two of the features we are mapping have empty
@@ -123,12 +127,43 @@ of the application to report this information.
 
 ===================== */
 
-var dataset = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson"
+var dataset = "https://raw.githubusercontent.com/CPLN692-MUSA611/datasets/master/geojson/philadelphia-garbage-collection-boundaries.geojson";
+
 var featureGroup;
 
 var myStyle = function(feature) {
+  switch (feature.properties.COLLDAY) {
+    case "MON": return {color: "#b35806"};
+    case "TUE": return {color: "#f1a340"};
+    case "WED": return {color: "#fee0b6"};
+    case "THR": return {color: "#d8daeb"};
+    case "FRI": return {color: "#998ec3"};
+    case " ": return {color: "#ff0000"};
+  }
+
   return {};
 };
+
+
+
+//
+// Style each garbage collection area with a different color depending on what day
+// of the week garbage collection occurs. For example, all areas with Monday
+// garbage collection could be red, all areas with Tuesday garbage collection could
+// be blue, etc.
+//
+// The myStyle function should return an object that contains style information.
+// For example, if you add the following line inside of the myStyle function, every
+// feature should be colored red.
+//
+// return {fillColor: 'red'}
+//
+// Other options for styling include opacity and weight. For a full list, see:
+// http://leafletjs.com/reference.html#path
+//
+// For our myStyle function, we want a different fillColor to be returned depending
+// on the day of the week. If you need help, review http://leafletjs.com/examples/geojson.html for
+// working examples of this function.
 
 var showResults = function() {
   /* =====================
@@ -160,15 +195,23 @@ var myFilter = function(feature) {
   return true;
 };
 
+var tempdata;
+
 $(document).ready(function() {
   $.ajax(dataset).done(function(data) {
     var parsedData = JSON.parse(data);
+    tempdata = parsedData;
     featureGroup = L.geoJson(parsedData, {
       style: myStyle,
       filter: myFilter
     }).addTo(map);
 
     // quite similar to _.each
+    // leaflet function, good for when your layer is part of a larger group;
+    // listening for an event = similar to click in jQuery
+    // any instance of a feature group is also of a layer group (dog is part of the feature of animals)
+    // remove by internal leaflet ID; you can also get the layer ID by feeding it the layer, etc., etc.)
+    // you can remove an object from the featurelayer and it will automatically be removed from the map! (because you are adding the entire feature layer, with or without anything that is included)
     featureGroup.eachLayer(eachFeatureFunction);
   });
 });

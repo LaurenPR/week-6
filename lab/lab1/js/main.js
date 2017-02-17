@@ -22,3 +22,26 @@ downloadData.done(function(data) {
   End your code here
   ================================ */
 });
+
+
+/*
+Notes:
+you can append to a specific item ID.
+
+
+_.each(parsedData, function(item){
+allofMyHtml += var my Html = "<div class = "item><h3>" + item.NAME+ ""</h3>";
+$(""#items")_.html(myHtml);
+})
+
+If you want to pass all of your Html
+
+var allOfMyHtml = "";
+_.each(parsedData, function(item){
+allofMyHtml += "<div class = "item><h3>" + item.NAME+ ""</h3>";
+});
+
+$(""#items")_.html(myHtml); //outside of the function
+
+
+*/
