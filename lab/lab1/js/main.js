@@ -28,14 +28,15 @@ downloadData.done(function(data) {
 Notes:
 you can append to a specific item ID.
 
-
+OPTION A:
 _.each(parsedData, function(item){
 allofMyHtml += var my Html = "<div class = "item><h3>" + item.NAME+ ""</h3>";
 $(""#items")_.html(myHtml);
 })
 
-If you want to pass all of your Html
 
+OPTION B:
+If you want to pass all of your Html (nothing is already in the hmtl file??)
 var allOfMyHtml = "";
 _.each(parsedData, function(item){
 allofMyHtml += "<div class = "item><h3>" + item.NAME+ ""</h3>";

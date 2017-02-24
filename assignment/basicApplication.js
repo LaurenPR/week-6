@@ -38,15 +38,39 @@ var state = {
   ]
 };
 
-var clickNextButton = function() {
-
-}
-
-var clickPreviousButton = function() {
-
-}
-
 var saySlideName = function(slide) {
+  console.log(slide);//??? The slide they are moving too??
   // saySlideName uses console.log to "say" the name of the slide it is given. It should run when
   // someone clicks on one of the buttons.
-}
+};
+
+var clickNextButton = function(currentViewCSSid, nextViewCSSid) {
+  $(currentViewCSSid).hide();
+  $(nextViewCSSid).show();
+  saySlideName(nextViewCSSid);
+};
+//might need to parse out sidebar and changes to map as seperate changes, not sure yet...
+
+var clickPreviousButton = function(currentViewCSSid, previousViewCSSid) {
+  $(currentViewCSSid).hide();
+  $(previousViewCSSid).show();
+  saySlideName(previousViewCSSid);
+};
+
+
+//The above requries knowing the previous ID. I think you might be able to make this more universal as follows:
+var arrayPageIDsInOrder = []; //an array of the ID's associated with the pages (in order)
+
+var clickNextButton2 = function(currentViewCSSid) {
+  $(currentViewCSSid).hide();
+  var indexValue = arrayPageIDsInOrder.indexOf(currentViewCSSid); //to find the index value of an element in the array
+  $(arrayPageIDsInOrder[indexValue+1]).show(); //to find the previous ID
+};
+
+var clickPreviousButton2 = function(currentViewCSSid) {
+  $(currentViewCSSid).hide();
+  var indexValue = arrayPageIDsInOrder.indexOf(currentViewCSSid); //to find the index value of an element in the array
+  $(arrayPageIDsInOrder[indexValue-1]).show(); //to find the previous ID
+};
+//There must also be a way to query the system so that it knows the current ID that is active (un-hidden)...
+//(then it would work with no manual input and be more adaptive)
