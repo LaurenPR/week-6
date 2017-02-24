@@ -215,7 +215,8 @@ $(document).ready(function() {
     // listening for an event = similar to click in jQuery
     // any instance of a feature group is also of a layer group (dog is part of the feature of animals)
     // remove by internal leaflet ID; you can also get the layer ID by feeding it the layer, etc., etc.)
-    // you can remove an object from the featurelayer and it will automatically be removed from the map! (because you are adding the entire feature layer, with or without anything that is included)
+    // you can remove an object from the featurelayer and it will automatically be removed from the map!
+    // (because you are adding the entire feature layer, with or without anything that is included)
     featureGroup.eachLayer(eachFeatureFunction);
   });
 });
